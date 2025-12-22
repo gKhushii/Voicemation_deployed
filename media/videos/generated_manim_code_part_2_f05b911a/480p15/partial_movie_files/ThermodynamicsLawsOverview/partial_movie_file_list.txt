@@ -1,0 +1,5 @@
+# This file is used internally by FFMPEG.
+file 'file:D:/Files/Voicemation/Voicemation/react frontend voicemeation/media/videos/generated_manim_code_part_2_f05b911a/480p15/partial_movie_files/ThermodynamicsLawsOverview/1185818338_650843583_223132457.mp4'
+file 'file:D:/Files/Voicemation/Voicemation/react frontend voicemeation/media/videos/generated_manim_code_part_2_f05b911a/480p15/partial_movie_files/ThermodynamicsLawsOverview/624642324_518654234_1801394572.mp4'
+file 'file:D:/Files/Voicemation/Voicemation/react frontend voicemeation/media/videos/generated_manim_code_part_2_f05b911a/480p15/partial_movie_files/ThermodynamicsLawsOverview/624642324_1141282389_4128836194.mp4'
+file 'file:D:/Files/Voicemation/Voicemation/react frontend voicemeation/media/videos/generated_manim_code_part_2_f05b911a/480p15/partial_movie_files/ThermodynamicsLawsOverview/624642324_2153202729_2860669487.mp4'

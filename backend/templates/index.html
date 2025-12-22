@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Voicemation</title>
+    <!-- Use a simple CDN to load a professional font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🎬 Voicemation - Animated Explainer</h1>
+
+        <!-- Duration Controls Section -->
+        <div class="control-panel">
+            <label>Video Duration Control:</label>
+            <div class="duration-controls">
+                
+                <!-- AI Decision Button -->
+                <button id="aiDurationBtn" class="control-btn active" data-duration="ai">🤖 AI Decide</button>
+                
+                <!-- Manual Dropdown -->
+                <div class="manual-duration">
+                    <button id="manualDurationToggle" class="control-btn" data-duration="manual">⏱ Set Manually</button>
+                    <select id="manualDurationSelect" style="display:none;" disabled>
+                        <option value="30" selected>30 seconds</option>
+                        <option value="60">1 minute</option>
+                        <option value="120">2 minutes</option>
+                        <option value="180">3 minutes</option>
+                        <option value="300">5 minutes</option>
+                    </select>
+                </div>
+            </div>
+            <p class="duration-hint">Current Setting: AI will determine the optimal duration based on the content.</p>
+        </div>
+
+        <!-- Main Interaction -->
+        <button id="recordBtn">🎤 Record & Generate Animation</button>
+        <p id="status"></p>
+
+        <div class="video-container">
+            <!-- Video output -->
+            <video id="outputVideo" controls></video>
+            
+            <!-- Subtitle Display Window (New) -->
+            <div id="subtitleDisplay" class="subtitle-window">
+                <p id="currentSubtitleText">Subtitles will appear here when the video starts playing.</p>
+            </div>
+        </div>
+
+    </div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+# This file is used internally by FFMPEG.
+file 'file:D:/Files/Voicemation/Voicemation/react frontend voicemeation/media/videos/generated_manim_code_part_4_7c30f944/480p15/partial_movie_files/SecondLawScene/1185818338_4280650610_223132457.mp4'
+file 'file:D:/Files/Voicemation/Voicemation/react frontend voicemeation/media/videos/generated_manim_code_part_4_7c30f944/480p15/partial_movie_files/SecondLawScene/624642324_3890345977_4182259220.mp4'
+file 'file:D:/Files/Voicemation/Voicemation/react frontend voicemeation/media/videos/generated_manim_code_part_4_7c30f944/480p15/partial_movie_files/SecondLawScene/624642324_2336582032_3299101705.mp4'
+file 'file:D:/Files/Voicemation/Voicemation/react frontend voicemeation/media/videos/generated_manim_code_part_4_7c30f944/480p15/partial_movie_files/SecondLawScene/624642324_3890345977_2609289293.mp4'
+file 'file:D:/Files/Voicemation/Voicemation/react frontend voicemeation/media/videos/generated_manim_code_part_4_7c30f944/480p15/partial_movie_files/SecondLawScene/624642324_1096224215_2086417858.mp4'
+file 'file:D:/Files/Voicemation/Voicemation/react frontend voicemeation/media/videos/generated_manim_code_part_4_7c30f944/480p15/partial_movie_files/SecondLawScene/624642324_2475379470_2286659183.mp4'
+file 'file:D:/Files/Voicemation/Voicemation/react frontend voicemeation/media/videos/generated_manim_code_part_4_7c30f944/480p15/partial_movie_files/SecondLawScene/624642324_3995946416_3248795085.mp4'

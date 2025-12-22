@@ -1,0 +1,148 @@
+body {
+font-family: 'Inter', sans-serif;
+text-align: center;
+padding: 20px;
+background: #121212; /* Darker background */
+color: #f0f0f0;
+min-height: 100vh;
+}
+
+h1 {
+color: #4CAF50; /* Green accent */
+margin-bottom: 30px;
+}
+
+.container {
+max-width: 900px;
+margin: auto;
+}
+
+/* --- Control Panel Styling --- */
+.control-panel {
+margin: 20px 0;
+padding: 15px;
+background: #1e1e1e;
+border-radius: 8px;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.duration-controls {
+display: flex;
+justify-content: center;
+gap: 15px;
+margin-top: 10px;
+}
+
+.control-btn {
+padding: 10px 15px;
+font-size: 14px;
+cursor: pointer;
+border: 2px solid #333;
+border-radius: 6px;
+background: #282828;
+color: #fff;
+transition: background 0.2s, border-color 0.2s;
+}
+
+.control-btn:hover {
+background: #3a3a3a;
+}
+
+.control-btn.active {
+background: #4CAF50;
+border-color: #4CAF50;
+font-weight: 600;
+}
+
+.manual-duration {
+display: flex;
+gap: 10px;
+}
+
+#manualDurationSelect {
+padding: 8px;
+border-radius: 6px;
+background: #333;
+color: #fff;
+border: 1px solid #555;
+font-size: 14px;
+}
+
+.duration-hint {
+margin-top: 10px;
+font-size: 0.85em;
+color: #aaa;
+}
+
+/* --- Video and Subtitle Styling --- */
+.video-container {
+display: flex;
+flex-direction: column;
+align-items: center;
+margin-top: 30px;
+gap: 20px;
+}
+
+#outputVideo {
+width: 100%;
+max-width: 600px;
+border-radius: 10px;
+box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+display: none; /* Hidden by default */
+}
+
+.subtitle-window {
+    width: 100%;
+    max-width: 600px;
+    min-height: 120px;
+    max-height: 250px;  /* allow scroll if too long */
+    padding: 15px;
+    background: #000000;
+    border: 2px solid #555;
+    border-radius: 8px;
+    overflow-y: auto;   /* scroll enabled */
+    text-align: left;   /* paragraph alignment */
+    line-height: 1.5em;
+    font-size: 1em;
+    box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.1);
+}
+
+.subtitle-window p {
+    margin-bottom: 15px;  /* spacing between scene paragraphs */
+}
+
+
+#currentSubtitleText {
+    color: #FFF;
+    font-size: 1em;
+    font-weight: 400;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    margin: 0;
+    white-space: pre-wrap; /* preserve line breaks if needed */
+}
+
+
+/* Standard Button for Recording */
+#recordBtn {
+padding: 15px 30px;
+font-size: 18px;
+font-weight: 700;
+border: none;
+border-radius: 8px;
+background: linear-gradient(145deg, #4CAF50, #388E3C);
+color: white;
+box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+transition: transform 0.1s, box-shadow 0.1s;
+}
+
+#recordBtn:hover {
+background: linear-gradient(145deg, #5cb85c, #47a447);
+box-shadow: 0 6px 20px rgba(76, 175, 80, 0.6);
+transform: translateY(-1px);
+}
+
+#status {
+margin-top: 15px;
+font-style: italic;
+color: #E0E0E0;
+}

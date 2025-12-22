@@ -1,0 +1,116 @@
+import os
+import re
+import subprocess
+import speech_recognition as sr
+from azure.ai.inference import ChatCompletionsClient
+from azure.ai.inference.models import SystemMessage, UserMessage
+from azure.core.credentials import AzureKeyCredential
+
+# Function to process speech and trigger animations
+def process_speech(speech_text):
+    if "exit" in speech_text.lower():
+        print("Exiting program...")
+        return False  # Stop listening
+
+    print("🧠 Sending speech to GPT for animation generation...")
+    gpt_response = get_gpt_response(speech_text)
+
+    manim_code = extract_manim_code(gpt_response)
+    if manim_code:
+        class_name = extract_class_name(manim_code)
+        temp_file_path = save_manim_code_to_temp_file(manim_code)
+        run_manim(temp_file_path, class_name)
+    else:
+        print("❌ No valid Manim code generated.")
+
+    return True
+
+# Get GPT response using Azure AI Inference
+def get_gpt_response(speech_text):
+    endpoint = "https://models.github.ai/inference"
+    model = "openai/gpt-4.1"
+    token = os.environ["GITHUB_TOKEN"]
+
+    client = ChatCompletionsClient(
+        endpoint=endpoint,
+        credential=AzureKeyCredential(token),
+    )
+
+    response = client.complete(
+        messages=[
+            SystemMessage("You are a helpful assistant. Generate ONLY valid Manim Python code inside triple backticks when the user asks for an animation."),
+            UserMessage(speech_text),
+        ],
+        temperature=1.0,
+        top_p=1.0,
+        model=model
+    )
+
+    gpt_response = response.choices[0].message.content
+    print(f"\n📩 GPT Response:\n{gpt_response}\n")
+    return gpt_response
+
+# Extract only Python code block from GPT response
+def extract_manim_code(gpt_response):
+    match = re.search(r"```(?:python)?\s+([\s\S]*?)```", gpt_response)
+    if match:
+        code = match.group(1).strip()
+        print("✅ Extracted Python code successfully.")
+        return code
+    else:
+        print("❌ No valid Python code block found in GPT response.")
+        return None
+
+# Extract Scene class name dynamically
+def extract_class_name(manim_code):
+    match = re.search(r"class\s+(\w+)\s*\(Scene\):", manim_code)
+    if match:
+        return match.group(1)
+    return "Scene"
+
+# Save code to a temp .py file
+def save_manim_code_to_temp_file(manim_code):
+    temp_file_path = os.path.join(
+        os.getenv("TEMP", "/tmp"),
+        "generated_manim_code.py"
+    )
+    with open(temp_file_path, "w") as file:
+        file.write(manim_code)
+    print(f"📁 Saved Manim code to: {temp_file_path}")
+    return temp_file_path
+
+# Run the Manim animation
+def run_manim(temp_file_path, class_name):
+    command = ["manim", "-pql", temp_file_path, class_name]
+    try:
+        print("🎬 Running Manim command:", " ".join(command))
+        result = subprocess.run(command, capture_output=True, text=True, check=True, timeout=120)
+        print("\n✅ Manim animation complete.\n")
+        print("▶️ Output:\n", result.stdout)
+        print("⚠️ Errors (if any):\n", result.stderr)
+    except subprocess.CalledProcessError as e:
+        print("❌ Manim execution error:")
+        print("Output:", e.stdout)
+        print("Errors:", e.stderr)
+    except subprocess.TimeoutExpired:
+        print("⏱️ Manim command timed out.")
+
+# Main speech recognition loop
+recognizer = sr.Recognizer()
+
+while True:
+    with sr.Microphone() as source:
+        print("\n🎤 Listening for animation commands (say 'exit' to quit)...")
+        audio = recognizer.listen(source, timeout=None, phrase_time_limit=10)
+        try:
+            speech_text = recognizer.recognize_google(audio)
+            print(f"🗣️ Recognized: {speech_text}")
+            if not process_speech(speech_text):
+                break
+        except sr.UnknownValueError:
+            print("🤷 Could not understand the audio.")
+        except sr.RequestError:
+            print("🚫 Speech recognition service is unavailable.")
+        except KeyboardInterrupt:
+            print("\n🛑 Program terminated.")
+            break

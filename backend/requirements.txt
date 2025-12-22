@@ -1,0 +1,32 @@
+# ---- Core Tools ----
+setuptools
+wheel
+
+# ---- Web Framework ----
+Flask==3.0.3
+Flask-Cors==4.0.0
+gunicorn==21.2.0
+python-dotenv==1.0.1
+
+# ---- Speech & Audio ----
+SpeechRecognition==3.10.4
+mutagen==1.47.0
+pydub==0.25.1
+ffmpeg-python==0.2.0
+gTTS==2.5.3
+
+# ---- AI / Azure Integration ----
+# azure-ai-inference will be installed separately from binary, not here
+azure-core==1.30.2
+
+# ---- Animation & Math Rendering ----
+manim==0.19.0
+numpy
+sympy==1.13.2
+Pillow==10.3.0
+
+# ---- Video Editing ----
+moviepy==1.0.3
+
+# ---- HTTP Utils ----
+requests==2.32.3

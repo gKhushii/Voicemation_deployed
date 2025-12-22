@@ -1,0 +1,5 @@
+# This file is used internally by FFMPEG.
+file 'file:D:/Files/Voicemation/Voicemation/react frontend voicemeation/media/videos/generated_manim_code_part_5_5d095502/480p15/partial_movie_files/ArtifactScene/1185818338_35841041_507085440.mp4'
+file 'file:D:/Files/Voicemation/Voicemation/react frontend voicemeation/media/videos/generated_manim_code_part_5_5d095502/480p15/partial_movie_files/ArtifactScene/624642324_3890345977_2405140640.mp4'
+file 'file:D:/Files/Voicemation/Voicemation/react frontend voicemeation/media/videos/generated_manim_code_part_5_5d095502/480p15/partial_movie_files/ArtifactScene/624642324_2326464315_667598288.mp4'
+file 'file:D:/Files/Voicemation/Voicemation/react frontend voicemeation/media/videos/generated_manim_code_part_5_5d095502/480p15/partial_movie_files/ArtifactScene/624642324_1141282389_2270071919.mp4'
