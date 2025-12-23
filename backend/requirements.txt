@@ -17,6 +17,7 @@ gTTS==2.5.3
 
 # ---- AI / Azure Integration ----
 # azure-ai-inference will be installed separately from binary, not here
+azure-ai-inference==1.0.0b7
 azure-core==1.30.2
 
 # ---- Animation & Math Rendering ----
