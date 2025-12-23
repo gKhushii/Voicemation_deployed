@@ -33,6 +33,7 @@ def sanitize_manim_code(manim_code: str) -> str:
     - font_size/color/scale_tips/width-height-depth incompatibilities
     - move_to / next_to errors
     - arrange_in_grid alignment KeyErrors
+    - Removes LaTeX usage (MathTex / Tex) for Render compatibility
     """
     code = manim_code.encode("utf-8", "ignore").decode("utf-8")
 
@@ -59,11 +60,24 @@ def sanitize_manim_code(manim_code: str) -> str:
     code = re.sub(r'\.to_edge\s*\(\s*CENTER\s*(,\s*buff\s*=\s*\d+)?\s*\)', '.move_to(ORIGIN)', code)
     code = code.replace("BROWN", "MAROON")
     code = code.replace("brown", "MAROON")
-    code = re.sub( 
-    r'SVGMobject\(".*?"[^\)]*\)',
-    'Circle(radius=0.5, color=GRAY, fill_opacity=0.7)',
-    code
-)
+
+    # --- 4. REMOVE LaTeX (CRITICAL for Render) ---
+    # Replace MathTex("a") / Tex("a") → Text("a")
+    code = re.sub(
+        r'\b(MathTex|Tex)\s*\(\s*(".*?"|\'.*?\')\s*\)',
+        r'Text(\2)',
+        code
+    )
+
+    # --- 5. Replace unsupported SVGs ---
+    code = re.sub(
+        r'SVGMobject\(".*?"[^\)]*\)',
+        'Circle(radius=0.5, color=GRAY, fill_opacity=0.7)',
+        code
+    )
+
+    return code
+
 
     # --- 4. arrange_in_grid alignment fixes ---
     def fix_alignments(match):
