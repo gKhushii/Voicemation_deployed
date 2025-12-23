@@ -17,17 +17,14 @@ from flask_cors import CORS
 
 CORS(
     app,
-    resources={r"/*": {
-        "origins": [
-            "http://localhost:3000",
-            "http://localhost:5173",
-            "https://voicemation-deployed-qvku.vercel.app",
-            "https://voicemation-deployed.onrender.com"
-        ],
-        "methods": ["GET", "POST", "OPTIONS"],
-        "allow_headers": ["Content-Type", "Authorization"]
-    }}
+    supports_credentials=True,
+    origins=[
+        "https://voicemation-deployed-qvku.vercel.app",
+        "http://localhost:3000",
+        "http://localhost:5173",
+    ],
 )
+
 
 
 # do NOT use debug=True in production-style runs
@@ -36,12 +33,15 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 OUTPUT_VIDEO = None  # store the latest video path
 FFMPEG_BIN = os.environ.get("FFMPEG_BIN", "ffmpeg")
 
-@app.after_request
-def after_request(response):
-    response.headers.add("Access-Control-Allow-Origin", "*")
-    response.headers.add("Access-Control-Allow-Headers", "Content-Type,Authorization")
-    response.headers.add("Access-Control-Allow-Methods", "GET,POST,OPTIONS")
-    return response
+@app.before_request
+def handle_preflight():
+    if request.method == "OPTIONS":
+        response = jsonify({"status": "ok"})
+        response.headers.add("Access-Control-Allow-Origin", request.headers.get("Origin", "*"))
+        response.headers.add("Access-Control-Allow-Headers", "Content-Type, Authorization")
+        response.headers.add("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
+        return response
+
 
 # -----------------------
 # Helpers
@@ -110,7 +110,7 @@ def download():
     return jsonify({"error": "No video generated yet."}), 404
 
 
-@app.route("/generate_audio", methods=["POST"])
+@app.route("/generate_audio", methods=["POST", "OPTIONS"])
 def generate_audio():
     """
     Accepts 'audio' (webm) and optional form field 'duration_limit'
