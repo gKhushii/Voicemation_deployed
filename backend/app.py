@@ -13,7 +13,22 @@ from voicemation import process_speech   # your pipeline
 from subtitle_utils import parse_srt_to_json
 
 app = Flask(__name__)
-CORS(app)
+from flask_cors import CORS
+
+CORS(
+    app,
+    resources={r"/*": {
+        "origins": [
+            "http://localhost:3000",
+            "http://localhost:5173",
+            "https://voicemation-deployed-qvku.vercel.app",
+            "https://voicemation-deployed.onrender.com"
+        ],
+        "methods": ["GET", "POST", "OPTIONS"],
+        "allow_headers": ["Content-Type", "Authorization"]
+    }}
+)
+
 
 # do NOT use debug=True in production-style runs
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
@@ -21,6 +36,12 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 OUTPUT_VIDEO = None  # store the latest video path
 FFMPEG_BIN = os.environ.get("FFMPEG_BIN", "ffmpeg")
 
+@app.after_request
+def after_request(response):
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    response.headers.add("Access-Control-Allow-Headers", "Content-Type,Authorization")
+    response.headers.add("Access-Control-Allow-Methods", "GET,POST,OPTIONS")
+    return response
 
 # -----------------------
 # Helpers
