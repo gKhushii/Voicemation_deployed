@@ -157,8 +157,9 @@ export default function VoicemationApp() {
       formData.append("audio", audioToUse, "audio.webm")
       formData.append("duration_limit", durationMode === "ai" ? "0" : duration.toString())
 
-      const FLASK_URL = "http://127.0.0.1:5001"
-      const endpoint = `${FLASK_URL}/generate_audio`
+      const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL!
+      const endpoint = `${API_BASE}/generate_audio`
+
 
       console.log("[v0] Sending request to Flask backend:", endpoint)
 
