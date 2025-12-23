@@ -191,7 +191,7 @@ export default function VoicemationApp() {
       console.log("[v0] Response from Flask:", result)
 
       if (result.video_url) {
-        const fullVideoUrl = result.video_url.startsWith("http") ? result.video_url : `${FLASK_URL}${result.video_url}`
+        const fullVideoUrl = result.video_url.startsWith("http") ? result.video_url : `${API_BASE}${result.video_url}`
         const newVideoUrl = fullVideoUrl + "?t=" + new Date().getTime()
         const newSubtitles = result.subtitles_json || []
 
